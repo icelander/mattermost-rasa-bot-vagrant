@@ -1,0 +1,7 @@
+.vagrant
+.DS_Store
+e20license.txt
+mattermost_archives/
+certs/
+
+__pycache__

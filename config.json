@@ -1,0 +1,63 @@
+{
+    "ServiceSettings": {
+        "SiteURL": "http://mattermost.planex.com",
+        "LicenseFileLocation": "/opt/mattermost/config/license.txt",
+        "EnableBotAccountCreation": true
+    },
+    "TeamSettings": {
+        "SiteName": "Planex Mattermost",
+        "MaxUsersPerTeam": 10000
+    },
+    "SqlSettings": {
+        "DriverName": "mysql",
+        "DataSource": "mmuser:MATTERMOST_PASSWORD@tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8\u0026readTimeout=30s\u0026writeTimeout=30s"
+    },
+    "PasswordSettings": {
+        "MinimumLength": 5,
+        "Lowercase": false,
+        "Number": false,
+        "Uppercase": false,
+        "Symbol": false
+    },
+    "LogSettings": {
+        "EnableConsole": true,
+        "ConsoleLevel": "DEBUG",
+        "ConsoleJson": false,
+        "EnableFile": true,
+        "FileLevel": "DEBUG",
+        "FileJson": false
+    },
+    "LdapSettings": {
+        "Enable": true,
+        "EnableSync": true,
+        "LdapServer": "127.0.0.1",
+        "LdapPort": 389,
+        "ConnectionSecurity": "",
+        "BaseDN": "ou=people,dc=planetexpress,dc=com",
+        "BindUsername": "cn=admin,dc=planetexpress,dc=com",
+        "BindPassword": "GoodNewsEveryone",
+        "UserFilter": "(objectClass=inetOrgPerson)",
+        "GroupFilter": "(objectClass=Group)",
+        "GuestFilter": "",
+        "EnableAdminFilter": true,
+        "AdminFilter": "(\u0026(objectClass=inetOrgPerson)(memberof=cn=admin_staff,ou=people,dc=planetexpress,dc=com))",
+        "GroupDisplayNameAttribute": "cn",
+        "GroupIdAttribute": "entryUUID",
+        "FirstNameAttribute": "cn",
+        "LastNameAttribute": "sn",
+        "EmailAttribute": "mail",
+        "UsernameAttribute": "uid",
+        "NicknameAttribute": "givenName",
+        "IdAttribute": "entryUUID",
+        "PositionAttribute": "ou",
+        "LoginIdAttribute": "uid",
+        "SyncIntervalMinutes": 10,
+        "LoginFieldName": "Planet Express Username",
+        "PictureAttribute": "jpegPhoto",
+        "Trace": true
+    },
+    "PluginSettings": {
+        "Enable": true,
+        "EnableUploads": true
+    }
+}
