@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "========= Installing Python3 ========="
 apt-get install python3-pip -y
 
-pip3 install rasa mmpy_bot
+echo "========= Installing mmpybot ========="
+pip3 install -Iv mmpy_bot

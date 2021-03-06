@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-MATTERMOST_VERSION = "5.29.0"
+MATTERMOST_VERSION = "5.32.1"
 
 MYSQL_ROOT_PASSWORD = 'mysql_root_password'
 MATTERMOST_PASSWORD = 'really_secure_password'
@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.network :private_network, ip: "192.168.1.100"
-  config.vm.hostname = 'mattermost'
+  config.vm.hostname = 'mattermost-rasa'
 
   config.vm.provision :docker do |d|
     d.run 'mariadb', 
@@ -29,7 +29,12 @@ Vagrant.configure("2") do |config|
              -e MYSQL_DATABASE=mattermost"
     d.run 'ldap',
       image: 'rroemhild/test-openldap',
-      args: "-p 389:389"
+      args: "-p 389:10389"
+    # d.run 'rasa',
+    #   image: 'rasa/rasa:2.1.2',
+    #   cmd: 'init --no-prompt',
+    #   args: "-p 5005:5005\
+    #          -v /vagrant/rasa:/app"
   end
 
   config.vm.provision :shell, inline: 'apt-get update && apt-get upgrade -y'

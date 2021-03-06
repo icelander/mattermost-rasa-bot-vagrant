@@ -8,8 +8,9 @@ import requests
 @respond_to('')
 def send_to_rasa(message):
 	post_data = message.body['data']['post']
-
+	print(post_data)
 	# Skip all but regular posts
+	# TODO, skip @all, @channel, @here
 	if post_data['type'] != '':
 		return
 
@@ -27,6 +28,8 @@ def send_to_rasa(message):
 		'user_name': message.get_username()
 	}
 
+	print(outgoing_data)
+
 	if 'file_ids' in post_data:
 		outgoing_data['file_ids'] = post_data['file_ids']
 
@@ -37,5 +40,17 @@ def send_to_rasa(message):
 
 	rasa_url += 'webhooks/mattermost/webhook'
 
-	# TODO: Add error handling
-	resp = requests.post(rasa_url, json=outgoing_data)
+	try:
+		resp = requests.post(rasa_url, json=outgoing_data)
+
+		if resp.status_code != 200:
+			message.send("Rasabot is having technical difficulties. Please try again.")
+			pass
+	except Exception as e:
+		message.send("Rasabot is having technical difficulties. Please try again.")
+		
+
+	
+	
+
+	

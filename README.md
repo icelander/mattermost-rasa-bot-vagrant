@@ -13,17 +13,17 @@ Because Outgoing Webhooks don't work in private channels, we'll have to use `mmp
 If you already have Vagrant installed follow these instructions:
 
 1. Edit your hosts file to point `mattermost.planex.com` to the IP address on line 19 of the Vagrant file
-1. Run `vagrant up`
-2. Create a bot user, add them to the team, and set the token value in:
+2. Run `vagrant up`
+3. Create a bot user, add them to the team, and set the token value in:
 	- `rasa/credentials.yml`
 	- `rasabot/mmpy_bot_settings.py`
-2. Run `vagrant ssh` and then
+4. Run `vagrant ssh` and then
 	1. `cd /vagrant/rasa`
 	2. `rasa run`
-3. Open a new terminal window, run `vagrant ssh` again and then
+5. Open a new terminal window, run `vagrant ssh` again and then
 	1. `cd /vagrant/rasabot`
 	2. `MATTERMOST_BOT_SETTINGS_MODULE=mmpy_bot_settings mmpy_bot`
-4. Invite the bot user to any channels you like, or DM them
+6. Invite the bot user to any channels you like, or DM them
 
 ### 1. Create a Mattermost Bot
 
@@ -51,7 +51,16 @@ While you can do a lot of very useful things with `mmpy_bot`, the open source ma
 pip3 install rasa
 ```
 
-Then edit `credentials.yml` to set the bot name, token, and the Rasa webhook URL.
+Then, close the terminal and log back in to update your `$PATH` and run these commands:
+
+```bash
+mkdir rasa
+cd rasa
+# You may have to restart the terminal for your $PATH to update
+rasa init
+```
+
+This will initialize the machine learning models with some simple commands that you can test. Finally, edit `credentials.yml` to set the bot name, token, and the Rasa webhook URL.
 
 ```yaml
 mattermost:
@@ -62,20 +71,21 @@ mattermost:
 
 ### 4. Start `mmpy_bot` and Rasa
 
-In one terminal window, start up `mmpy_bot` with this command from inside the `rasabot` directory in this directory:
+In one terminal window, start up `mmpy_bot` with this command:
 
 ```bash
+cd /vagrant/rasabot
 MATTERMOST_BOT_SETTINGS_MODULE=mmpy_bot_settings mmpy_bot
 ```
 
-Then, in another window, start the Rasa server from inside the `rasa` in this directory:
+Then, in another window, initialize Rasa and start the bot:
 
 ```bash
-cd /vagrant/rasa # If you're using
+# Make sure you're in ~/rasa
 rasa run
 ```
 
-Finally, send a message to your bot in Mattermost and watch it respond!
+Finally, send a message to your bot in Mattermost and watch it respond! Either `@` reply in a channel or DM the bot.
 
 ## Discussion
 

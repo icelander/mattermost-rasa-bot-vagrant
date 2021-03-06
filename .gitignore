@@ -3,5 +3,6 @@
 e20license.txt
 mattermost_archives/
 certs/
+rasa/models/
 
 __pycache__
