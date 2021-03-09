@@ -28,7 +28,7 @@ def send_to_rasa(message):
 		'user_name': message.get_username()
 	}
 
-	print(outgoing_data)
+	print(json.dumps(outgoing_data, indent=2))
 
 	if 'file_ids' in post_data:
 		outgoing_data['file_ids'] = post_data['file_ids']
@@ -44,6 +44,7 @@ def send_to_rasa(message):
 		resp = requests.post(rasa_url, json=outgoing_data)
 
 		if resp.status_code != 200:
+			print(json.dumps(resp.json(), indent=2))
 			message.send("Rasabot is having technical difficulties. Please try again.")
 			pass
 	except Exception as e:
